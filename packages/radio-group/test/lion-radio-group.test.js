@@ -238,4 +238,52 @@ describe('<lion-radio-group>', () => {
 
     expect(group.serializedValue).to.deep.equal('');
   });
+
+  it('is accessible', async () => {
+    const el = await fixture(html`
+      <lion-radio-group>
+        <label slot="label">My group</label>
+        <lion-radio name="gender[]" value="male">
+          <label slot="label">male</label>
+        </lion-radio>
+        <lion-radio name="gender[]" value="female">
+          <label slot="label">female</label>
+        </lion-radio>
+      </lion-radio-group>
+    `);
+    await nextFrame();
+    await expect(el).to.be.accessible();
+  });
+
+  it('is accessible when the group is disabled', async () => {
+    const el = await fixture(html`
+      <lion-radio-group disabled>
+        <label slot="label">My group</label>
+        <lion-radio name="gender[]" value="male">
+          <label slot="label">male</label>
+        </lion-radio>
+        <lion-radio name="gender[]" value="female">
+          <label slot="label">female</label>
+        </lion-radio>
+      </lion-radio-group>
+    `);
+    await nextFrame();
+    await expect(el).to.be.accessible();
+  });
+
+  it('is accessible when an option is disabled', async () => {
+    const el = await fixture(html`
+      <lion-radio-group>
+        <label slot="label">My group</label>
+        <lion-radio name="gender[]" value="male" disabled>
+          <label slot="label">male</label>
+        </lion-radio>
+        <lion-radio name="gender[]" value="female">
+          <label slot="label">female</label>
+        </lion-radio>
+      </lion-radio-group>
+    `);
+    await nextFrame();
+    await expect(el).to.be.accessible();
+  });
 });
