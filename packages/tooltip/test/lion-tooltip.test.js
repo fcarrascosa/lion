@@ -123,5 +123,30 @@ describe('lion-tooltip', () => {
       const invoker = el.querySelector('[slot="invoker"]');
       expect(invoker.getAttribute('aria-controls')).to.not.be.null;
     });
+
+    it('should be accessible when closed', async () => {
+      const el = await fixture(html`
+        <lion-tooltip>
+          <div slot="content">Hey there</div>
+          <lion-button slot="invoker">Tooltip button</lion-button>
+        </lion-tooltip>
+      `);
+      await expect(el).to.be.accessible;
+    });
+
+    it('should be accessible when opened', async () => {
+      const el = await fixture(html`
+        <lion-tooltip>
+          <div slot="content">Hey there</div>
+          <lion-button slot="invoker">Tooltip button</lion-button>
+        </lion-tooltip>
+      `);
+      const invoker = el.querySelector('[slot="invoker"]');
+      const eventFocusIn = new Event('focusin');
+      invoker.dispatchEvent(eventFocusIn);
+      await el.updateComplete;
+
+      await expect(el).to.be.accessible;
+    });
   });
 });
