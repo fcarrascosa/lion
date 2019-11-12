@@ -72,5 +72,29 @@ describe('lion-popup', () => {
       const invoker = el.querySelector('[slot="invoker"]');
       expect(invoker.getAttribute('aria-controls')).to.not.be.null;
     });
+
+    it('should be accessible when closed', async () => {
+      const el = await fixture(html`
+        <lion-popup>
+          <div slot="content" class="popup">Hey there</div>
+          <lion-button slot="invoker">Popup button</lion-button>
+        </lion-popup>
+      `);
+      await expect(el).to.be.accessible();
+    });
+
+    it('should be accessible when opened', async () => {
+      const el = await fixture(html`
+        <lion-popup>
+          <div slot="content" class="popup">Hey there</div>
+          <lion-button slot="invoker">Popup button</lion-button>
+        </lion-popup>
+      `);
+      const invoker = el.querySelector('[slot="invoker"]');
+      invoker.click();
+      await el.updateComplete;
+
+      await expect(el).to.be.accessible();
+    });
   });
 });
