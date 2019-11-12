@@ -14,4 +14,25 @@ describe('<lion-input-email>', () => {
     lionInputEmail.modelValue = 'foo@bar@example.com';
     expect(lionInputEmail.errorState).to.equal(true);
   });
+
+  it('is accessible', async () => {
+    const lionInputEmail = await fixture(
+      `<lion-input-email><label slot="label">Label</label></lion-input-email>`,
+    );
+    await expect(lionInputEmail).to.be.accessible();
+  });
+
+  it('is accessible when readonly', async () => {
+    const lionInputEmail = await fixture(
+      `<lion-input-email readonly><label slot="label">Label</label></lion-input-email>`,
+    );
+    await expect(lionInputEmail).to.be.accessible();
+  });
+
+  it('is accessible when disabled', async () => {
+    const lionInputEmail = await fixture(
+      `<lion-input-email disabled><label slot="label">Label</label></lion-input-email>`,
+    );
+    await expect(lionInputEmail).to.be.accessible();
+  });
 });
