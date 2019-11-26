@@ -33,8 +33,7 @@
   ],
   "dependencies": {
     "@lion/core": "^0.3.0",
-    "@lion/overlays": "^0.6.4",
-    "@lion/popup": "^0.3.17"
+    "@lion/overlays": "^0.6.4"
   },
   "devDependencies": {
     "@lion/button": "^0.3.40",
